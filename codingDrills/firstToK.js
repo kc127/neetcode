@@ -1,4 +1,5 @@
 /*
+5/22/23
 Problem:
 
 Given an array of positive integers, find the first element that occurs k number of times. If no element occurs k times, return -1. You may assume k is greater than 0.
