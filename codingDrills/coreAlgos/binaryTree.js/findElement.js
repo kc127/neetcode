@@ -1,9 +1,9 @@
-function findElement(root, target) {
+function findElementDFS(root, target) {
   if (!root) {
     return false;
   }
   if (root.value === target) {
     return true;
   }
-  return findElement(root.left, target) || findElement(root.right, element);
+  return findElementDFS(root.left, target) || findElementDFS(root.right, element);
 }
