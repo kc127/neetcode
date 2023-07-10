@@ -1,5 +1,7 @@
 /* Maximum Subarray
 
+Given an array, find the subarray with the maximum sum
+
 -2 1 -3 4 -1 2 1 -5 4 returns 6
    l
       r
