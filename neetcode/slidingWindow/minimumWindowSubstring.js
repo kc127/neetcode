@@ -46,7 +46,6 @@ function smallestSubstr(str, subStr) {
         }
       }
       right++;
-      console.log("right", right)
     } else {
       let currLeft = str[left];
        if (letterMap[currLeft]) {
@@ -55,7 +54,6 @@ function smallestSubstr(str, subStr) {
           charsEncountered--;
         }
        }
-       console.log("left", left, "right", right)
        bestScore = Math.min(bestScore, right - left);
        left++;
     }
