@@ -120,3 +120,28 @@ console.log(JSON.stringify(linearizeRowMajor(matrix))
 console.log(JSON.stringify(linearizeColumnMajor(matrix))
 === JSON.stringify([1,6,11,2,7,12,3,8,13,4,9,14,5,10,15]))
 
+// official solution 
+
+function linearizeRowMajor(matrix) {
+  const result = [];
+
+  for (let r = 0; r < matrix.length; r++) {
+    for (let c = 0; c < matrix[0].length; c++) {
+      result.push(matrix[r][c]);
+    }
+  }
+
+  return result;
+}
+
+function linearizeColumnMajor(matrix) {
+  const result = [];
+
+  for (let c = 0; c < matrix[0].length; c++) {
+    for (let r = 0; r < matrix.length; r++) {
+        result.push(matrix[r][c]);
+    }
+  }
+
+  return result;
+}
