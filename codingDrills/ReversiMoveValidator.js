@@ -1,5 +1,7 @@
 /*
 '''
+https://leetcode.com/problems/check-if-move-is-legal/solutions/3695399/c-solution/
+
 Reversi Move Validator
 
 Reversi (https://en.wikipedia.org/wiki/Reversi), also called Othello, is a game where each disc has two sides, black and white, and after being placed, further moves cause other discs to flip colors. Specifically, a line of discs of one color gets flipped when surrounded on both ends by discs of the opposite color.
