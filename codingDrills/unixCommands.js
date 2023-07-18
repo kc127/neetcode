@@ -108,3 +108,59 @@ console.log(JSON.stringify(unixCommands([])) === "[0,0,0]")
 console.log(JSON.stringify(unixCommands(["cp", "ls", "mv", "!1", "!2", "!3", "!4", "!5", "!6"])) === "[3,3,3]")
 
 
+/* another approach : official solution 1 */
+
+function unixCommands(commands) {
+  // Initialize all counters to 0.
+  let cpCount = 0;
+  let lsCount = 0;
+  let mvCount = 0;
+
+  // Helper function that is reusable code throughout the main function.
+  function countCmd(command) {
+    if (command === "cp") {
+      cpCount += 1;
+    } else if (command === "ls") {
+      lsCount += 1;
+    } else if (command === "mv") {
+      mvCount += 1;
+    }
+  }
+
+  // Main loop
+  for (let i = 0; i < commands.length; i++) {
+    if (!commands[i].includes("!")) {
+      countCmd(commands[i]);
+    } else {
+      let cmd = commands[i];
+      // Use a while loop since there's a possibility for nested !.
+      while (cmd.includes("!")) {
+        // Get the index of the cmd: !1 is calculated as 1 - 1 = 0th index
+        cmd = commands[parseInt(cmd.substring(1)) - 1];
+      }
+      countCmd(cmd);
+    }
+  }
+
+  return [cpCount, lsCount, mvCount];
+}
+
+
+/** another approach: official solution 2 */
+
+function unixCommands(commands):
+    let cp = 0, ls = 0, mv = 0;
+    for (let c of commands) {
+        while (c[0] === '!') {
+            c = commands[parseInt(cmd.substring(1)) - 1];
+        }
+        if (c === 'cp') {
+            cp++;
+        } else if (c === 'ls') {
+            ls++;
+        } else if (c === 'mv') {
+            mv++;
+        }
+    }
+
+    return [cp, ls, mv];
