@@ -33,6 +33,23 @@ function canMatchFellows(skillMap) {
   return true;
 }
 
+/*
+
+function canMatchFellows(skillMap) {
+  let skillSet = new Set()
+  for (let fellow in skillMap) {
+    let skill = skillMap[fellow]
+    if (skillSet.has(skill)) {
+      skillSet.delete(skill)
+    } else {
+      skillSet.add(skill)
+    }
+  }
+  return skillSet.size == 0
+}
+
+*/
+
 let skillMap1 = {"oliver": 3, "pixel": 3, "pinky": 5, "tobey": 5}
 console.log(canMatchFellows(skillMap1) == true);
 
