@@ -46,7 +46,7 @@ function countCircularPrimes(upperBound) {
  function isCircularPrime2(num) {
    const numStr = num.toString();
    const length = numStr.length;
-
+  
    for (let i = 1; i < length; i++){
      const rotatedNumStr = numStr.substring(i) + numStr.substring(0, i);
      const rotatedNum = parseInt(rotatedNumStr);
