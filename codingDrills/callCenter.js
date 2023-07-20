@@ -168,3 +168,43 @@ actions = [
 ];
 result = processCallCenterActions(actions);
 console.log(JSON.stringify(result) === JSON.stringify([['1', 'A'], ['2', 'B'], ['3', 'A'], ['4', 'B']]));
+
+/* official solution */
+function processCallCenterActions(actions) {
+  let operatorQueue = [];
+  let callQueue = [];
+  let connections = [];
+
+  for (let [action, id] of actions) {
+      if (action === "add_operator") {
+          if (callQueue.length > 0) {
+              // If there are calls waiting, connect the operator with the first call in the queue
+              let callId = callQueue.shift();
+              connections.push([callId, id]);
+          } else {
+              // If there are no waiting calls, add the operator to the operator queue
+              operatorQueue.push(id);
+          }
+      } else if (action === "receive_call") {
+          if (operatorQueue.length > 0) {
+              // If there are operators available, connect the call with the first operator in the queue
+              let operatorId = operatorQueue.shift();
+              connections.push([id, operatorId]);
+          } else {
+              // If there are no operators available, add the call to the call queue
+              callQueue.push(id);
+          }
+      } else if (action === "release_operator") {
+          if (callQueue.length > 0) {
+              // If there are calls waiting, connect the released operator with the first call in the queue
+              let callId = callQueue.shift();
+              connections.push([callId, id]);
+          } else {
+              // If there are no waiting calls, add the released operator back to the operator queue
+              operatorQueue.push(id);
+          }
+      }
+  }
+
+  return connections;
+}
