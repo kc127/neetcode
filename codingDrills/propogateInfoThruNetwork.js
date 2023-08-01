@@ -250,4 +250,98 @@ function getNeighborCells(i, j, network) {
   return neighborCells
 }
 
+
+
+/*
+'''
+Propagate information through a network
+
+A subset of database servers in a grid network received an update that needs to be replicated to the remaining nodes. Nodes can only broadcast updates to their immediate neighbors, north, west, south, and east, each second.
+
+Given an initial state of the nodes with the updated information, determine how many seconds it will take to propagate the update to the entire network.
+
+
+EXAMPLE(S)
+If the state of the network at the 0th second is:
+[
+  [0, 0, 0],
+  [0, 1, 0],
+  [0, 0, 0]
+]
+Then it takes 2 seconds to propagate the information. After the 1st second:
+[
+  [0, 1, 0],
+  [1, 1, 1],
+  [0, 1, 0]
+]
+After the 2nd second:
+[
+  [1, 1, 1],
+  [1, 1, 1],
+  [1, 1, 1]
+]
+
+Approach:
+- traverse the matrix in row-major fashion
+  - if curr cell is 1 => get all neighbors and make it 1
+  -
+
+
+FUNCTION SIGNATURE
+function broadcastTime(network) {
+
+}
+*/
+
+function broadcastTime(network) {
+  // find cell with updated information
+  let ones = []
+  for (let r = 0; r < network.length; r++) {
+    for (let c = 0; c < network[0].length; c++) {
+      if (network[r][c] === 1) {
+        ones.push([r,c]);
+      }
+    }
+  }
+
+  let elapsedTime = 0;
+
+  while (ones.length > 0) {
+    let nextLayer = [];
+    let alreadyUpdated = false;
+    for (let k = 0; k < ones.length; k++) {
+      let [r,c] = ones[k];
+      let neighbors = getNeighbors(r, c, network);
+
+      for (let [nr,nc] of neighbors) {
+        if (network[nr,nc] === 0) {
+          alreadyUpdated = true;
+          nextLayer.push([nr, nc]);
+        }
+      }
+      layer = nextLayer;
+      elapsedTime = alreadyUpdated ? elapsedTime + 1 : elapsedTime
+    }
+  }
+
+  return elapsedTime;
+}
+
+
+function getNeighbors(r, c, matrix) {
+  let neighbors = [];
+  let delta_row = [-1, 0, 1, 0];
+  let delta_col = [0, 1, 0, -1];
+
+  for (let i = 0; i < delta_row.length; i++) {
+    let neighborRow = r + delta_row[i];
+    let neighborCol = c + delta_col[j];
+    if (0 <= neighborRow )
+  }
+
+
+  return neighbors;
+}
+
+
 */
