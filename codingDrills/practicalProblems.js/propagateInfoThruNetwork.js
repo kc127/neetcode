@@ -68,29 +68,38 @@ def broadcastTime(network: list[list[int]]) -> int:
 
 function broadcastTime(network) {
   let seconds = 0;
-
+  let layer = [];
   for (let i = 0; i < network.length; i++) {
     for (let j = 0; j < network[i].length; j++) {
       if (network[i][j] === 1) {
-        let neighbors = findNeighbors(i, j, network);
-        for (let [r,c] of neighbors) {
-          network[r][c] = 1;
-        }
-        if (neighbors.length !== 0) seconds++;
+        layer.push([i,j]);
       }
     }
   }
 
-  console.log(network)
-  console.log(seconds);
+  // perform BFS to update all the nodes in the network and count the levels
+  while (layer.length > 0) {
+    let nextLayer = [];
+    let updateOccured = false;
+    for (let k = 0; k < layer.length; k++) {
+      let neighbors = findNeighbors(layer[k][0],layer[k][1], network);
+
+      for (let neighbor of neighbors) {
+        let [r,c] = neighbor;
+        if (network[r][c] === 0) {
+          network[r][c] = 1;
+          updateOccured = true;
+          nextLayer.push([r,c]);
+        }
+      }
+    }
+    layer = nextLayer;
+    seconds = updateOccured ? seconds + 1 : seconds + 0;
+  }
+  return seconds;
 }
-/*
-1 1
-1 1
-*/
+
 function findNeighbors(i, j, matrix) {
-  //neighbors -> previous and next position
-  //previous and next array same index
   let neighbors = [];
   let rowLen = matrix.length;
   let colLen = matrix[0].length;
@@ -106,6 +115,7 @@ function findNeighbors(i, j, matrix) {
   return neighbors;
 }
 
+/*
 // official solution - in-place solution
 
 function broadcastTime(network) {
@@ -162,7 +172,7 @@ function getNeighborCells(i, j, network) {
 
   return neighborCells
 }
-
+*/
 /*
           (-1,0)
      (0,-1) i,j (0,1)
@@ -179,65 +189,65 @@ let network = [
 
 console.log(broadcastTime(network))
 
-// let network1 = [
-//   [1],
-//   [0],
-//   [0],
-// ]
-// console.log(broadcastTime(network1) == 2)
+let network1 = [
+  [1],
+  [0],
+  [0],
+]
+console.log(broadcastTime(network1) == 2)
 
-// let network2 = [
-//   [0,0,0],
-//   [0,1,0],
-//   [0,0,0],
-// ]
-// console.log(broadcastTime(network2) == 2)
+let network2 = [
+  [0,0,0],
+  [0,1,0],
+  [0,0,0],
+]
+console.log(broadcastTime(network2) == 2)
 
-// let network3 = [
-//   [0,0,0],
-//   [0,0,0],
-//   [0,1,0],
-// ]
-// console.log(broadcastTime(network3) == 3)
+let network3 = [
+  [0,0,0],
+  [0,0,0],
+  [0,1,0],
+]
+console.log(broadcastTime(network3) == 3)
 
-// let network4 = [
-//   [1,0,1],
-//   [0,0,0],
-//   [0,1,0],
-// ]
-// console.log(broadcastTime(network4) == 1)
+let network4 = [
+  [1,0,1],
+  [0,0,0],
+  [0,1,0],
+]
+console.log(broadcastTime(network4) == 1)
 
-// let network5 = [
-//   [0,0,0,0,0],
-//   [0,0,0,0,0],
-//   [0,0,1,0,0],
-//   [0,0,0,0,0],
-//   [0,0,0,0,0]
-// ]
-// console.log(broadcastTime(network5) == 4)
+let network5 = [
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,1,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0]
+]
+console.log(broadcastTime(network5) == 4)
 
-// let network6 = [
-//   [0,0,0,0,0],
-//   [0,1,0,1,0],
-//   [0,0,0,0,0],
-//   [0,1,0,1,0],
-//   [0,0,0,0,0]
-// ]
-// console.log(broadcastTime(network6) == 2)
+let network6 = [
+  [0,0,0,0,0],
+  [0,1,0,1,0],
+  [0,0,0,0,0],
+  [0,1,0,1,0],
+  [0,0,0,0,0]
+]
+console.log(broadcastTime(network6) == 2)
 
-// let network7 = [
-//   [1,0,0,0,1],
-//   [0,0,0,0,0],
-//   [0,0,0,0,0],
-//   [0,0,0,0,0],
-//   [0,0,0,0,1]
-// ]
-// console.log(broadcastTime(network7) == 4)
+let network7 = [
+  [1,0,0,0,1],
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,1]
+]
+console.log(broadcastTime(network7) == 4)
 
-// let network8 = [
-//   [0,0,0],
-//   [0,0,0],
-//   [0,0,0],
-//   [1,0,0],
-// ]
-// console.log(broadcastTime(network8) == 5)
+let network8 = [
+  [0,0,0],
+  [0,0,0],
+  [0,0,0],
+  [1,0,0],
+]
+console.log(broadcastTime(network8) == 5)
