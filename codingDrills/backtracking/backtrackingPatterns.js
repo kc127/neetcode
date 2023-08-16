@@ -39,7 +39,7 @@ function findLargestNode(root) {
    i)  path pattern using stack
    ii) node pattern that saves the sum so far and passes the state
         i) top down => sum the node value and pass it to left and right subtree
-        ii) bottom up => start unraveling at the end 
+        ii) bottom up => start unraveling at the end
 
 */
 
@@ -85,6 +85,7 @@ function findLargestPathSumTopDown(root) {
 
     if (!root.left && !root.right) {
       largestSoFar = Math.max(largestSoFar, pathTotalToHere);
+
     }
 
     if (root.left) {
@@ -98,6 +99,7 @@ function findLargestPathSumTopDown(root) {
   if (root) {
     dfsHelper(root, 0);
   }
+  return largestSoFar;
 }
 
 function findLargestPathSumBottomUp(root) {
