@@ -34,23 +34,7 @@ function underlineMistakenNumbers(upperBound) {
 }
 
 /*
- * HELPER FUNCTION : to get flipped version of the num
- * @params: integer
- * returns integer
- */
-function flipNum(num) {
-  let flippedNum = [];
-  let validNums = {'0':'0', '1':'1', '6':'9', '8':'8', '9':'6'}
-  let numToStr = num.toString();
-  for (let i = numToStr.length - 1; i >= 0; i--) {
-    flippedNum.push(validNums[numToStr[i]]);
-  }
-
-  return parseInt(flippedNum.join(''));
-}
-
-/*
- * HELPER FUNCTION 2: to check if given number can be flipped or not
+ * HELPER FUNCTION: to check if given number can be flipped or not
  * @params: integer
  * returns boolean
  */
@@ -71,6 +55,26 @@ function isFlippable(num) {
 
   return (flippedNum <= 650 && flippedNum !== num) ? true : false;
 }
+
+
+/*
+ * HELPER FUNCTION: to get flipped version of number containing 0, 1, 6, 8 and 9
+ * @params: integer
+ * returns integer
+ */
+function flipNum(num) {
+  let flippedNum = [];
+  let validNums = {'0':'0', '1':'1', '6':'9', '8':'8', '9':'6'}
+  let numToStr = num.toString();
+
+  for (let i = numToStr.length - 1; i >= 0; i--) {
+    flippedNum.push(validNums[numToStr[i]]);
+  }
+
+  return parseInt(flippedNum.join(''));
+}
+
+
 
 const results = underlineMistakenNumbers(650)
 console.log(results.length === 20)
