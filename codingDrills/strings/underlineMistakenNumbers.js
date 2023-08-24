@@ -42,7 +42,6 @@ function isFlippable(num) {
   let numToStr = num.toString();
   let numsThatAreNonFlippable = ['2', '3', '4', '5', '7'];
   let numsThatEqualThemselves = ['0', '1', '8'];
-  let flippedNum = flipNum(num);
 
   for (let char of numToStr) {
     if (numsThatAreNonFlippable.includes(char)) {
@@ -53,6 +52,7 @@ function isFlippable(num) {
     }
   }
 
+  let flippedNum = flipNum(num);
   return (flippedNum <= 650 && flippedNum !== num) ? true : false;
 }
 
