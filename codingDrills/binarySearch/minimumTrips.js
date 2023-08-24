@@ -18,8 +18,6 @@ On the 5th tick, there are 11 trips in total, [5, 5, 1].
 
 0        50           100
 
-
-
 */
 
 function minimumTimeTaken(times, trips) {
