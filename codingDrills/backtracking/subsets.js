@@ -21,6 +21,5 @@ var subsets = function(nums) {
       dfs(i+1);
   }
   dfs(0);
-
   return results;
 };

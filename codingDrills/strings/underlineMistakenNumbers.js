@@ -53,7 +53,7 @@ function isFlippable(num) {
   }
 
   let flippedNum = flipNum(num);
-  return (flippedNum <= 650 && flippedNum !== num) ? true : false;
+  return flippedNum <= 650 && flippedNum !== num;
 }
 
 
