@@ -11,11 +11,11 @@
  * @param {number} k
  * @return {number[]}
  */
-function distanceK(root, target, k) {
+function allNodesKDistance(root, target, k) {
   let nodesKDistanceAway = [];
-  //let targetNode = getNodeReference(root, target);
+  let targetNode = getNodeReference(root, target);
   let parentMap = getChildToParentMap(root, null);
-  let queue = target ? [target] : [];
+  let queue = targetNode ? [targetNode] : [];
   let seen = new Set();
 
   while (queue.length !== 0 && k) {
@@ -23,29 +23,24 @@ function distanceK(root, target, k) {
 
     for (let i = 0; i < size; i++) {
       let curr = queue.shift();
-      let parentOfCurr = getNodeReference(root, parentMap[curr.val])
-      seen.add(curr.val);
+      let parentOfCurr = parentMap[curr.value]
+      seen.add(curr.value);
 
-      if (curr.left && !seen.has(curr.left.val)) queue.push(curr.left);
-      if (curr.right && !seen.has(curr.right.val)) queue.push(curr.right);
-
-      if (parentOfCurr && !seen.has(parentMap[curr.val])) queue.push(parentOfCurr);
+      if (curr.left && !seen.has(curr.left.value)) queue.push(curr.left);
+      if (curr.right && !seen.has(curr.right.value)) queue.push(curr.right);
+      if (parentOfCurr && !seen.has(parentOfCurr.value)) queue.push(parentOfCurr);
     }
+
     k--;
   }
 
-  while (queue.length !== 0) {
-    let curr = queue.shift();
-    nodesKDistanceAway.push(curr.val);
-  }
-
-  return nodesKDistanceAway;
+  return queue.map(node => node.value);
 }
 
 function getChildToParentMap (currNode, parentNode, parentMap = {}) {
   if (!currNode) return;
 
-  parentMap[currNode.val] = parentNode ? parentNode.val : null;
+  parentMap[currNode.value] = parentNode ? parentNode : null;
   getChildToParentMap(currNode.left, currNode, parentMap);
   getChildToParentMap(currNode.right, currNode, parentMap);
 
@@ -54,7 +49,7 @@ function getChildToParentMap (currNode, parentNode, parentMap = {}) {
 
 function getNodeReference(node, target) {
   if (!node) return null;
-  if (node.val === target) return node;
+  if (node.value === target) return node;
 
   let leftSubtree = getNodeReference(node.left, target);
   if (leftSubtree) return leftSubtree;
@@ -64,7 +59,6 @@ function getNodeReference(node, target) {
 
   return null;
 }
-
 /// after the feedback
 // Given a binary tree, a target node, and integer k, return an array of all node values that are k distance away from the target node in any direction. This means we must include nodes that can only be reached by going up the tree via parent pointers.
 
