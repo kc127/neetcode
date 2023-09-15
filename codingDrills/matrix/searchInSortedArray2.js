@@ -19,3 +19,22 @@ var searchMatrix = function(matrix, target) {
   }
   return false;
 };
+
+
+function searchMatrix(matrix, target) {
+  const rows = matrix.length;
+  const columns = matrix[0].length;
+
+  let r = 0, c = columns - 1;
+  while (r < rows && c >= 0) {
+    const val = matrix[r][c];
+    console.log(val)
+    if (val === target) return true;
+    if (val < target) {
+      r++;
+    } else {
+      c--;
+    }
+  }
+  return false;
+}
