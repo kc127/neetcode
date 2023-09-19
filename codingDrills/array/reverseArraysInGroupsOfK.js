@@ -21,3 +21,21 @@ function reverseArr(arr, startIdx, endIdx) {
   }
   return res;
 }
+
+// official solution
+function reverse(arr, k) {
+  function reverseSubarray(start, count) {
+    let end = Math.min(arr.length, start + count) - 1
+    while (start < end) {
+      [arr[start], arr[end]] = [arr[end], arr[start]]
+      start++
+      end--
+    }
+  }
+
+  if (arr == null)
+    return
+
+  for (let i = 0; i < arr.length; i += k)
+    reverseSubarray(i, k)
+}
