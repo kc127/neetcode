@@ -110,3 +110,27 @@ print(sortColors([2, 1, 0, 2, 1, 2, 2])) # [0, 1, 1, 2, 2, 2, 2]
 print(sortColors([]))     # []
 print(sortColors([1]))    # [1]
 print(sortColors([0, 1])) # [0, 1]
+
+// in javascript
+
+var sortColors = function(nums) {
+    if (nums.length <= 1) return nums;
+
+    let zerosPtr = 0;
+    let onesPtr = 0;
+    let twosPtr = nums.length - 1;
+
+    while (onesPtr <= twosPtr) {
+        if (nums[onesPtr] === 0) {
+            [nums[zerosPtr],  nums[onesPtr]] = [nums[onesPtr], nums[zerosPtr]];
+            onesPtr++;
+            zerosPtr++;
+        } else if (nums[onesPtr] === 1) {
+            onesPtr++;
+        } else {
+            [nums[twosPtr],  nums[onesPtr]] = [nums[onesPtr], nums[twosPtr]]
+            twosPtr--;
+        }
+    }
+    return nums;
+};
