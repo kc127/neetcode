@@ -1,5 +1,5 @@
 /*
-
+INCOMPLETE and INCORRECT code
 Given the adjacency matrix of the connected undirected graph with no loops or multiple edges, find the distance between the two specified vertices.
 
 Example
