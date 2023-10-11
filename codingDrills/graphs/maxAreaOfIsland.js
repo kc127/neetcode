@@ -1,7 +1,14 @@
 /**
  * @param {number[][]} grid
  * @return {number}
- */
+ *
+ * WHY ITERATIVE is BETTER than RECURSIVE?
+ *
+ * - " In the real world, you should prefer iterative algorithms over recursive ones because the maximum number of recursive calls is limited by the size of the call stack, while an iterative algorithm uses its own stack or queue, which you control the size of. In other words, iterative solutions are usually way more scalable than recursive ones. This is true for Java and many other languages. There are exceptions, and there are ways around the call stack limitation (like tail-call optimization) but it's a good idea to check the size of your call stack before you consider recursive code."
+ *
+ * */
+
+
 var maxAreaOfIsland = function(grid) {
   let maxArea = 0;
   let visited = new Set();
@@ -28,3 +35,4 @@ var maxAreaOfIsland = function(grid) {
   }
   return maxArea;
 };
+
