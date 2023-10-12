@@ -58,45 +58,42 @@ function getTraversal(vertex_list, edge_list) {
 
   let adjList = createAdjacencyList();
   let allSources = getPossibleSources(adjList);
+
+  let adjList = createAdjacencyList();
+
+  let result = [];
+  let visited = new Set();
+
+  function findPathDFS(node, target) {
+
+    function hasPath(node) {
+      if (!adjList[node] || adjList[node].length === 0) {
+        result.unshift(node);
+        return;
+      }
+      if (node === target) {
+        return;
+      }
+
+      visited.add(node);
+      for (let neighbor of adjList[node]) {
+        if (!visited.has(neighbor)) {
+          hasPath(neighbor);
+        }
+      }
+      result.unshift(node);
+    }
+    hasPath(node);
+  }
+
+  findPathDFS(node, target);
+  return result;
 }
 
-// Arata
-function getTraversal(vertex_list, edge_list){
-  let adjList = new Map();
-
-  for(let v of vertex_list){
-    adjList.push(v, []);
-  }
-
-  for(let [source, edge] of edge_list){
-    if(adjList.has(source)){
-      adjList.set(source, adjList.get(source).concat(edge))
-    }
-  }
 
 
-  function getPossibleSources(adjList){
-    // adjList = {
-    //   'a': ['b', 'c'],
-    //   'b': ['c'],
-    //   'c': ['d']
-    // }
-    let neighbours = new Set()
-    for (key, val of Object.entries(adjList)) {
-      for (let v in val) {
-        neighbours.add(v)
-      }
-    }
-    let possibleSink = []
-    for (k in Object.keys(adjList)) {
-    if (!neighbours.has(k)) {
-      possibleSink.append(k)
-      }
-    }
-  }
 
-}
-// Connor
+////////////////
 function getAdjacencyList(vertexList, edgeList) {
   const adjacencyList = vertexList.reduce((acc, vertex) => {
     acc[vertex] = []
@@ -137,33 +134,8 @@ function getTraversal(vertexList, edgeList) {
 }
 
 
+/////////////////////////////////////
 
-// Nicholas
-function getTraversal(vertex_list, edge_list) {
-  const graph = new Map();
-
-  for (const v of vertex_list) {
-    graph.set(v, []);
-  }
-
-  for (const [src, dst] of edge_list) {
-    graph.get(src).push(dst);
-  }
-
-
-  function dfs(vertex) {
-
-  }
-
-  function getPossibleSources(adjacencyList) {
-
-  }
-
-
-
-
-
-// Erin
 const edgesAsAdjList = (edges) => {
   let graph = {};
   for (let i=0; i<edges.length; ++i) {
@@ -197,3 +169,5 @@ const topSort = (edges) => {
     }
   }
 }
+
+
