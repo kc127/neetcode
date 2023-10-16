@@ -261,34 +261,7 @@ function countLiberties_Daria(board, x, y) {
         // - Stop
 }
 
-// DFS traversal solution:
-function countLiberties_Maria(board, x, y) {
-  let directions = [(-1, 0), (0, 1), (1, 0), (-1, 0)];
-  // - Initialize libertyCounter to 0
-  let libertyCounter = 0;
-  // - Initialize a visited set
-  let visited = new Set();
-  // With all DFS questions there are two ways to solve:
-    // Recursive
-    // Iterative (stack)
-  // - We need to start from the coordinates provided (x, y)
-  // - We'll need to MOVE IN ALL DIRECTIONS (up, down, left, right)
-  // - Set next coordinate as -
-    // x: currentCoordinate[0] + direction[0]
-    // y: currentCoordinate[1] + direction[1]
 
-  // - If the next coordinate is in the visited set: continue
-  // - Else: GO to the coordinate
-    // - Add current coordinates to visited set
-    // - Check current location type:
-      // - Same color:
-        // - Repeat
-      // - Opposite color:
-        // - Stop moving in that direction
-      // - Empty space:
-        // - Increment our libertyCounter
-        // - Stop
-}
 
 
 // DFS traversal solution:
