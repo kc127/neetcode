@@ -7,6 +7,7 @@ function bfs(root, adjacencyList, targetLevel) {
   let queue = [];
   queue.push([root, 0]);
   visited.add(root);
+  
   while (queue.length) {
     let [nodeId, level] = queue.shift();
 
