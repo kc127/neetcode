@@ -18,14 +18,11 @@ Here's what the given graph looks like:
 
 */
 
-const { createDecipheriv } = require("crypto");
-
 function solution(matrix, vertex1, vertex2) {
 
     if (matrix.length === 0 || matrix[0].length === 0) {
         return 0;
     }
-
 
     function createAdjList() {
          let adjList = {};
