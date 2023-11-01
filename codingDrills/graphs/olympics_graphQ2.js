@@ -1,3 +1,4 @@
+/*
 Given the adjacency matrix of a graph, determine if the graph contains a cycle.
 
 Example:
@@ -20,6 +21,7 @@ Represents a graph where both nodes point to each other:
 0 <-> 1
 There is a cycle!
 
+*/
 function solution(adjacency) {
 
   let adjList = {};
