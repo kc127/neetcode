@@ -18,6 +18,157 @@ Here's what the given graph looks like:
 
 */
 
+/* complete + correct code */
+
+/* question 2 */
+
+function distanceBetweenVertices(matrix, vertex1, vertex2) {
+    let adjList = {};
+
+    for (let i = 0; i < matrix.length; i++) {
+        adjList[i] = [];
+        for (let j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j]) {
+                adjList[i].push(j);
+            }
+        }
+    }
+
+    let edges = 0;
+
+
+      let visited = new Set();
+      let queue = [[vertex1, 0]];
+      let output = 0;
+      while (queue.length) {
+
+        let [node, level] = queue.shift();
+
+        if (node === vertex2) {
+          output = level;
+          break;
+        }
+
+
+        for (let neighbor of adjList[node]) {
+          if (!visited.has(neighbor)) {
+            queue.push([neighbor, level + 1]);
+          }
+          visited.add(neighbor);
+        }
+      }
+      console.log("I am set", visited)
+      return output;
+  }
+
+
+
+  // test cases:
+  let matrix =
+  [[false,true,false,false,false,false,false,false],
+   [true,false,true,false,false,false,false,false],
+   [false,true,false,true,false,false,false,false],
+   [false,false,true,false,true,false,false,false],
+   [false,false,false,true,false,true,false,false],
+   [false,false,false,false,true,false,true,false],
+   [false,false,false,false,false,true,false,true],
+   [false,false,false,false,false,false,true,false]]
+  let vertex1 = 7
+  let vertex2 = 0
+  let expected = 7
+
+  console.log(distanceBetweenVertices(matrix, vertex1, vertex2), expected)
+
+  matrix =
+  [[false,true,false,false],
+   [true,false,true,false],
+   [false,true,false,true],
+   [false,false,true,false]]
+  vertex1 = 0
+  vertex2 = 1
+  expected = 1;
+
+  console.log(distanceBetweenVertices(matrix, vertex1, vertex2), expected)
+
+
+
+  matrix =
+  [[false,true,false,true,false],
+   [true,false,true,false,true],
+   [false,true,false,true,true],
+   [true,false,true,false,false],
+   [false,true,true,false,false]]
+  vertex1= 0
+  vertex2= 4
+  expected = 2
+  /*
+
+  {
+    '0': [ 1, 3 ],
+    '1': [ 0, 2, 4 ],
+    '2': [ 1, 3, 4 ],
+    '3': [ 0, 2 ],
+    '4': [ 1, 2 ]
+  }
+
+                  0 (v1)
+                /   \
+              1       3
+            /   \   /
+       (v2)4  __  2
+
+  */
+
+  console.log(distanceBetweenVertices(matrix, vertex1, vertex2), expected)
+
+
+  matrix=
+  [[false,true,false,false],
+   [true,false,true,true],
+   [false,true,false,true],
+   [false,true,true,false]]
+  vertex1= 2
+  vertex2= 0
+  expected = 2
+
+  console.log(distanceBetweenVertices(matrix, vertex1, vertex2), expected)
+
+
+  matrix=
+  [[false,false,true],
+   [false,false,true],
+   [true,true,false]]
+  vertex1= 1
+  vertex2= 0
+  expected = 2
+
+  console.log(distanceBetweenVertices(matrix, vertex1, vertex2), expected)
+
+
+  matrix=
+  [[false,true,true],
+   [true,false,false],
+   [true,false,false]]
+  vertex1= 0
+  vertex2= 2
+  expected = 1
+
+  console.log(distanceBetweenVertices(matrix, vertex1, vertex2), expected)
+
+
+  matrix=
+  [[false,false,true],
+   [false,false,true],
+   [true,true,false]]
+  vertex1= 0
+  vertex2= 1
+  expected = 2
+
+  console.log(distanceBetweenVertices(matrix, vertex1, vertex2), expected)
+
+
+/* incomplete + incorrect code */
+
 function solution(matrix, vertex1, vertex2) {
 
     if (matrix.length === 0 || matrix[0].length === 0) {
@@ -62,26 +213,70 @@ function solution(matrix, vertex1, vertex2) {
     return edgeDistance;
 }
 
-/*
-    0 0 1
-    0 0 1
-    1 1 0
+// test cases:
+let matrix =
+[[false,true,false,false,false,false,false,false],
+ [true,false,true,false,false,false,false,false],
+ [false,true,false,true,false,false,false,false],
+ [false,false,true,false,true,false,false,false],
+ [false,false,false,true,false,true,false,false],
+ [false,false,false,false,true,false,true,false],
+ [false,false,false,false,false,true,false,true],
+ [false,false,false,false,false,false,true,false]]
+let vertex1 = 7
+let vertex2 = 0
+let expected = 7
 
-    adjList =
-    {
-        0: [2],
-        1: [2],
-        2: [0, 1]
-    }
+matrix =
+[[false,true,false,false],
+ [true,false,true,false],
+ [false,true,false,true],
+ [false,false,true,false]]
+vertex1 = 0
+vertex2 = 1
+expected = 1;
 
-    edgeList = {
-        [0, 2],
-        [1, 2],
-    }
 
-    approach:
+matrix =
+[[false,true,false,true,false],
+ [true,false,true,false,true],
+ [false,true,false,true,true],
+ [true,false,true,false,false],
+ [false,true,true,false,false]]
+vertex1= 0
+vertex2= 4
+expected = 2
 
-        use vertex1 as root
-        count levels using bfs
+matrix=
+[[false,true,false,false],
+ [true,false,true,true],
+ [false,true,false,true],
+ [false,true,true,false]]
+vertex1= 2
+vertex2= 0
 
-*/
+expected = 2
+
+matrix=
+[[false,false,true],
+ [false,false,true],
+ [true,true,false]]
+vertex1= 1
+vertex2= 0
+expected = 2
+
+matrix=
+[[false,true,true],
+ [true,false,false],
+ [true,false,false]]
+vertex1= 0
+vertex2= 2
+expected = 1
+
+matrix=
+[[false,false,true],
+ [false,false,true],
+ [true,true,false]]
+vertex1= 0
+vertex2= 1
+expected = 2
