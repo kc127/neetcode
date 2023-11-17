@@ -20,3 +20,20 @@ var lengthOfLongestSubstring = function(s) {
   }
   return longestSubStr;
 };
+
+// official solution
+
+function lengthOfLongestSubstring(s) {
+    const seen = {};
+    let start = 0;
+    let longest = 0;
+    for (let end = 0; end < s.length; end++) {
+      const char = s[end];
+      if (char in seen) {
+        start = Math.max(start, seen[char] + 1);
+      }
+      seen[char] = end;
+      longest = Math.max(longest, end - start + 1);
+    }
+    return longest;
+  }
