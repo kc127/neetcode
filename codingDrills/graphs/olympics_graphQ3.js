@@ -49,3 +49,45 @@ function solution(adjacency) {
   }
   return connectedComponents === 0 ? adjacency.length : connectedComponents;
 }
+
+
+////
+function solution(adjacency) {
+    if (adjacency.length === 0 || adjacency[0].length === 0) {
+      return 0;
+    }
+    let connectedComponents = 0;
+    let visited = new Set();
+
+    var dfs = function(r, c) {
+      let rows = adjacency.length;
+      let cols = adjacency[0].length;
+
+      if (visited.has(`${r},${c}`) || r < 0 || r >= rows || c < 0 || c >= cols || adjacency[r][c] === false) {
+          return;
+      }
+
+      visited.add(`${r},${c}`);
+      dfs(r-1,c-1);
+      dfs(r-1,c);
+      dfs(r-1,c+1);
+      dfs(r, c-1);
+      dfs(r, c+1);
+      dfs(r+1,c-1);
+      dfs(r+1,c);
+      dfs(r+1,c+1);
+  }
+
+
+    for (let i = 0; i < adjacency.length; i++) {
+        for (let j = 0; j < adjacency[0].length; j++) {
+          if (visited.has(`${i},${j}`)) {
+            continue;
+          } else if ( adjacency[i][j] === true) {
+            connectedComponents++;
+            dfs(i, j)
+          }
+        }
+    }
+    return connectedComponents;
+  }
