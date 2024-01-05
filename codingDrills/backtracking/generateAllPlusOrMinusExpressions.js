@@ -256,7 +256,34 @@ console.log(JSON.stringify(generateExprs("1210", 2).sort())
 
 
 
+// rough work
+function evaluateSolution(solution) {
+  // do concats
+  // do add/subtract
+  // return sum
+}
 
+[ 1, "", 2, "", 3 ]
+
+
+function outer(digits, target) {
+  function inner(solution, opIndex) {
+    if (opIndex >= solution.length) {
+      // evaluate whether this is a valid solution
+    }
+
+    for (let op in ["", "+", "-"]) {
+      let originalOp = solution[opIndex]
+      solution[opIndex] = op
+      inner(solution, opIndex + 2)
+      solution[opIndex] = ""
+    }
+  }
+}
+
+                             "123"
+       "123"                 "1+23"                  "1-23"
+"123" "12+3" "12-3"   "1+23" "1+2+3" "1+2-3"  "1-23" "1-2+3" "1-2-3"
 
 
 
