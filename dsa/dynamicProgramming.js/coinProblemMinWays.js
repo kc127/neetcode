@@ -194,3 +194,34 @@ minCoins()     minCoins() using c2   minCoins() using c2
 
 O(C^T) vs O(2^(C or T or both)), C = number of coins , T = target
 */
+
+/* bottom up with 2d matrix with O(amount * coins.length) time and space */
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+
+  let dp = new Array(coins.length + 1).fill(0).map((val) => new Array(amount+1).fill(0));
+  for (let i = 0; i < dp.length; i++) {
+      dp[i][0] = 0;
+  }
+  for (let j = 0; j < dp[0].length; j++) {
+      dp[0][j] = Infinity;
+  }
+  for (let i = 1; i <= coins.length; i++) {
+      for (let j = 1; j <= amount; j++) {
+          if (j < coins[i-1]) {
+              dp[i][j] = dp[i-1][j]
+          } else  {
+              dp[i][j] = Math.min(dp[i-1][j], 1 + dp[i][j - coins[i-1]]);
+          }
+
+      }
+  }
+  return dp[dp.length-1][dp[0].length - 1] > amount ? -1 : dp[dp.length-1][dp[0].length - 1];
+};
+
+/* same solution as above with refactoring */
+
