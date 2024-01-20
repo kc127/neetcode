@@ -225,3 +225,32 @@ var coinChange = function(coins, amount) {
 
 /* same solution as above with refactoring */
 
+// how to get coin combination for optimal ways
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+  let dp = new Array(amount + 1).fill(Infinity);
+  dp[0] = 0;
+  let coinIndex = new Array(amount + 1).fill(-1);
+  for (let i = 0; i < coins.length; i++) {
+      for (let j = 1; j <= amount; j++) {
+          if (coins[i] <= j) {
+              dp[j] = Math.min(dp[j], 1 + dp[j - coins[i]]);
+              coinIndex[j] = i;
+          }
+      }
+  }
+ // get the optimal coin combination
+  let coinsCombination = [];
+  let amt = amount;
+  while (amt >= 0) {
+      if (coinIndex[amt] === -1) break;
+      let coin = coins[coinIndex[amt]];
+      coinsCombination.push(coin);
+      amt -= coin;
+  }
+  return dp[amount] === Infinity ? -1 : dp[amount];
+};
