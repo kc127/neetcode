@@ -20,3 +20,26 @@ function solution(string) {
   return result.join(' ');
 }
 
+///////////
+function solution(string) {
+    reverse(string);
+    let i = 0;
+    let j = 0;
+    while (i < string.length) {
+        while (j < string.length && string[j] !== " ") {
+            j++;
+        }
+        reverse(string, i, j-1);
+        i = j+1;
+        j++;
+    }
+    return string;
+}
+
+function reverse(s, i, j) {
+    while (i <= j) {
+        [s[i],s[j]] = [s[j],s[i]];
+        i++;
+        j--;
+    }
+}
