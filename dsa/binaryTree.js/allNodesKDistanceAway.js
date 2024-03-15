@@ -1,3 +1,52 @@
+/* most optimal and elegant */
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} target
+ * @param {number} k
+ * @return {number[]}
+ */
+var distanceK = function(root, target, k) {
+  let visitedNodes = new Set();
+  let kNodes = [];
+
+  function getParentNodes(node, parent) {
+    if (node) {
+      node.parent = parent;
+      getParentNodes(node.left, node);
+      getParentNodes(node.right, node);
+    }
+  }
+
+  function dfs(node, distance) {
+    if (!node || visitedNodes.has(node.val)) {
+      return;
+    }
+    visitedNodes.add(node.val);
+    if (distance === k) {
+      kNodes.push(node.val);
+    } else {
+        dfs(node.left, distance + 1);
+        dfs(node.right, distance + 1);
+        dfs(node.parent, distance + 1);
+    }
+  }
+
+  getParentNodes(root, null);
+  dfs(target, 0);
+  return kNodes;
+};
+
+
+
+
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
